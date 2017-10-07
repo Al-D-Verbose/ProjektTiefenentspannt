@@ -40,7 +40,8 @@ function create() {
   layer = map.createLayer('Kachelebene 1');
   map.createLayer('Kachelebene 2').resizeWorld();
   layer.resizeWorld();
-
+  console.log(game.world.height);
+  console.log(game.world.width);
   player = game.add.sprite(132, 150, 'testChar', 151);
   //player.fixedToCamera = true;
   game.physics.arcade.enable(player);
@@ -57,8 +58,8 @@ function create() {
 var facing = 'up';
 function update() {
   //game.world.setBounds(player.x - game.width/2, player.y - game.height/2, game.width, game.height);
-  game.camera.x = player.x - game.width/2;
-  game.camera.y = player.y - game.height/2;
+  game.camera.x = player.x - game.width/2.2;
+  game.camera.y = player.y - game.height/2.2;
   player.body.velocity.x = 0;
   player.body.velocity.y = 0;
 
@@ -118,6 +119,12 @@ function update() {
     }
 
   }
+  else if (cursors.left.isDown)
+  {
+    player.body.velocity.x = -150;
+    player.animations.play('walkLeft');
+    facing = 'left';
+  }
   else if (cursors.right.isDown)
   {
     player.body.velocity.x = 150;
@@ -136,12 +143,7 @@ function update() {
     player.animations.play('walkUp');
     facing = 'up';
   }
-  else if (cursors.left.isDown)
-  {
-    player.body.velocity.x = -150;
-    player.animations.play('walkLeft');
-    facing = 'left';
-  }
+
 
   else
   {
